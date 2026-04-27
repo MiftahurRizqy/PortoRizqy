@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miftahur Rizqy | Fullstack & Data Engineer</title>
+    <meta name="description" content="Portfolio of Miftahur Rizqy, a Fullstack Developer and Data Engineer.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;700;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="neural-canvas"></canvas>
+
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+
+    <nav class="glass-nav">
+        <div class="nav-brand">MR<span class="accent">.</span></div>
+        <div class="nav-items">
+            <a href="#home" class="nav-item">01. Home</a>
+            <a href="#about" class="nav-item">02. About</a>
+            <a href="#skills" class="nav-item">03. Expertise</a>
+            <a href="#services" class="nav-item">04. Services</a>
+            <a href="#projects" class="nav-item">05. Projects</a>
+            <a href="#experience" class="nav-item">06. Experience</a>
+            <a href="#certifications" class="nav-item">07. Awards</a>
+            <a href="#publications" class="nav-item">08. Publications</a>
+            <button id="theme-toggle" class="nav-item theme-btn" aria-label="Toggle Theme">
+                <ion-icon name="sunny-outline" id="theme-icon"></ion-icon>
+            </button>
+        </div>
+        <div class="mobile-menu-btn">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <main class="content-wrapper">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section hidden">
+            <div
+                style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; gap: 2rem; flex-wrap: wrap;">
+                <div class="hero-container" style="flex: 1 1 400px; min-width: 300px;">
+                    <h1 class="main-title">
+                        MIFTAHUR <br /> <span class="text-outline">RIZQY</span>
+                    </h1>
+                    <h2 class="sub-title typing-text">Fullstack Developer & Data Engineer</h2>
+                    <div class="contact-info-pills">
+                        <span class="pill"><ion-icon name="location-outline"></ion-icon> Yogyakarta, Indonesia</span>
+                        <span class="pill"><ion-icon name="call-outline"></ion-icon> +6281331780570</span>
+                        <a href="mailto:miftrahurrizqy11@gmail.com" class="pill interactive"><ion-icon
+                                name="mail-outline"></ion-icon> Email Me</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual"
+                    style="flex: 0 0 auto; position: relative; display: flex; justify-content: center; align-items: center; margin: 2rem auto;">
+                    <div class="tech-circle"
+                        style="width: clamp(280px, 40vw, 400px); height: clamp(280px, 40vw, 400px);">
+                        <img src="iky.JPEG" alt="Miftahur Rizqy" class="profile-photo"
+                            style="width: calc(100% - 60px); height: calc(100% - 60px); border-radius: 50%; object-fit: cover; z-index: 10; border: 4px solid var(--accent-1); box-shadow: 0 0 30px rgba(0,243,255,0.5);">
+                        <div class="orbit-1"></div>
+                        <div class="orbit-2"></div>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+            <div class="scroll-indicator" style="position: relative; margin-top: 2rem; left: 0;">
+                <div class="mouse"></div>
+                <span>Scroll to explore</span>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section hidden">
+            <div class="section-header">
+                <h2 class="section-title">02. <span class="text-gradient">Initializing Profile</span></h2>
+                <div class="line"></div>
+            </div>
+            <div class="about-content grid-2-col">
+                <div class="about-text glass-card">
+                    <p>Saya adalah seorang Fullstack Developer sekaligus memiliki ketertarikan dan pengalaman di bidang
+                        Data Engineering, dengan kemampuan membangun aplikasi web secara end-to-end mulai dari frontend,
+                        backend, hingga pengelolaan database dan integrasi data. Berpengalaman dalam mengembangkan
+                        sistem yang efisien, scalable, dan terintegrasi untuk mendukung kebutuhan bisnis maupun
+                        pengguna.</p>
+                    <p>
+                        Selain pengembangan aplikasi, saya juga memiliki kemampuan dalam pengolahan data, perancangan
+                        database, serta transformasi data menjadi informasi yang bernilai untuk
+                        mendukung pengambilan keputusan. Terbiasa bekerja dengan backend development, API integration,
+                        SQL, dan data processing dalam membangun solusi digital yang terstruktur, optimal, dan berbasis
+                        data.
+                    </p>
+                    <p>
+                        Saya memiliki kemampuan adaptasi yang baik, semangat belajar yang tinggi, dan komitmen untuk
+                        terus mengembangkan keterampilan di bidang software development dan data engineering, serta
+                        berkontribusi secara kolaboratif dalam menciptakan solusi teknologi yang inovatif dan berdampak.
+                    </p>
+                </div>
+                <div class="about-visual glass-card highlight-border">
+                    <div class="tech-circle">
+                        <div class="core-text">Data<br>&<br>Code</div>
+                        <div class="orbit-1"></div>
+                        <div class="orbit-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section hidden">
+            <div class="section-header right-align">
+                <div class="line"></div>
+                <h2 class="section-title">03. <span class="text-gradient">Core Protocols</span></h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category glass-card">
+                    <h3><ion-icon name="code-slash"></ion-icon> Technical Stack</h3>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Kotlin</span>
+                        <span class="tag">SQL</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card">
+                    <h3><ion-icon name="color-palette-outline"></ion-icon> Design & Tools</h3>
+                    <div class="tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">Adobe Illustrator</span>
+                        <span class="tag">Adobe Lightroom</span>
+                        <span class="tag">Adobe Premiere Pro</span>
+                        <span class="tag">CorelDraw</span>
+                        <span class="tag">Canva</span>
+                        <span class="tag">Adobe Flash</span>
+                        <span class="tag">Blender 3D</span>
+                        <span class="tag">Draw.io</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card col-span-2">
+                    <h3><ion-icon name="analytics-outline"></ion-icon> Soft Skills</h3>
+                    <div class="tags soft-tags">
+                        <span class="tag soft">Project Management</span>
+                        <span class="tag soft">Communication</span>
+                        <span class="tag soft">Team Collaboration</span>
+                        <span class="tag soft">Problem Solving</span>
+                        <span class="tag soft">Time Management</span>
+                        <span class="tag soft">Analysis</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section hidden">
+            <div class="section-header">
+                <h2 class="section-title">04. <span class="text-gradient">Solutions & Services</span></h2>
+                <div class="line"></div>
+            </div>
+            <div class="grid-3-col">
+                <div class="service-card glass-card">
+                    <div class="service-icon"><ion-icon name="globe-outline"></ion-icon></div>
+                    <h3>Web Development</h3>
+                    <p>Building modern, stable information systems and informative user dashboards from scratch using
+                        responsive frameworks for cross-platform usage.</p>
+                </div>
+                <div class="service-card glass-card">
+                    <div class="service-icon"><ion-icon name="server-outline"></ion-icon></div>
+                    <h3>Data Engineering</h3>
+                    <p>Executing ETL pipelines, processing raw data, and structuring robust analytics or data
+                        visualizations to observe systematic trends.</p>
+                </div>
+                <div class="service-card glass-card">
+                    <div class="service-icon"><ion-icon name="hardware-chip-outline"></ion-icon></div>
+                    <h3>Machine Learning</h3>
+                    <p>Creating predictive AI models (like Random Forests & Regressions) and directly integrating them
+                        into functional systems for practical, real-world utility.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (Indonesian allowed by User) -->
+        <section id="projects" class="projects-section hidden">
+            <div class="section-header right-align">
+                <div class="line"></div>
+                <h2 class="section-title">05. <span class="text-gradient">Project Portfolio</span></h2>
+            </div>
+
+            <div class="project-timeline">
+
+                <div class="project-card glass-card">
+                    <div class="project-date">Jul 2024</div>
+                    <div class="project-type">Fullstack Developer (Laravel)</div>
+                    <h3 class="project-name">Richwellness.me - Yogyakarta</h3>
+                    <p class="project-desc">Sebagai programmer dalam proyek gabungan perkuliahan, saya mengembangkan
+                        fitur kunci, menulis kode berstandar, serta berkolaborasi untuk memenuhi spesifikasi. Saya juga
+                        merancang wireframe aplikasi.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/MiftahurRizqy/richwellness.git" target="_blank"
+                            class="interactive"><ion-icon name="logo-github"></ion-icon> Repository GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card project-right">
+                    <div class="project-type">Mobile Developer (Kotlin)</div>
+                    <h3 class="project-name">Sistem Kontrol Lampu Pintar</h3>
+                    <p class="project-desc">Mengembangkan aplikasi kontrol lampu pintar menggunakan Kotlin berbasis
+                        mobile. Sistem ini memungkinkan pengaturan status lampu dari jarak jauh secara intuitif dan
+                        otomatisasi pencahayaan.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <div class="project-type">Fullstack Developer (Laravel)</div>
+                    <h3 class="project-name">Dashboard Web PT Aino Indonesia</h3>
+                    <p class="project-desc">Merancang dan mengembangkan dashboard perusahaan berbasis web dengan
+                        visualisasi data meliputi grafik dan peta interaktif. Melakukan optimisasi kode untuk
+                        meningkatkan performa sistem.</p>
+                </div>
+
+                <div class="project-card glass-card project-right">
+                    <div class="project-type">Fullstack Developer - Data Mining (Django)</div>
+                    <h3 class="project-name">Sistem Prediksi Permintaan Stok</h3>
+                    <p class="project-desc">Mengembangkan model Regresi Linier guna memprediksi kebutuhan stok bulanan
+                        yang ditarik dari data transaksi. Membangun antarmuka dashboard dengan kerangka kerja Django
+                        untuk presentasi data.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/MiftahurRizqy/Sistemprediksistok" target="_blank"
+                            class="interactive"><ion-icon name="logo-github"></ion-icon> Repository GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card">
+                    <div class="project-type">Fullstack Developer (Laravel)</div>
+                    <h3 class="project-name">CCBS PT Life Media</h3>
+                    <p class="project-desc">Revitalisasi sistem Customer Care and Billing System (CCBS), mencakup
+                        pembuatan front-end hingga back-end. Bertanggung jawab terhadap finalisasi deployment server
+                        serta konfigurasi domain produksi.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/MiftahurRizqy/capstone1" target="_blank"
+                            class="interactive"><ion-icon name="logo-github"></ion-icon> Repository GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card project-right">
+                    <div class="project-type">Fullstack Developer - Machine Learning (Django)</div>
+                    <h3 class="project-name">Sistem Prediksi Risiko Preeklampsia</h3>
+                    <p class="project-desc">Membangun integrasi model Random Forest pada aplikasi web (Django) untuk
+                        memprediksi dini preeklampsia. Semua pengumpulan dataset klinis nyata dilakukan mandiri beserta
+                        konfigurasi online untuk aksesibilitas publik.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/MiftahurRizqy/preeklamsia-dan-eklamsia" target="_blank"
+                            class="interactive"><ion-icon name="logo-github"></ion-icon> GitHub</a>
+                        <a href="https://preeklamsia-dan-eklamsia-production.up.railway.app/" target="_blank"
+                            class="interactive"><ion-icon name="open-outline"></ion-icon>
+                            Kunjungi Web</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Experience & Education Section (Indonesian allowed by User) -->
+        <section id="experience" class="edu-section hidden">
+            <div class="section-header">
+                <h2 class="section-title">06. <span class="text-gradient">Training & Background</span></h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="grid-2-col">
+                <div class="edu-col">
+                    <h3 class="sub-heading"><ion-icon name="school-outline"></ion-icon> Pendidikan Formal</h3>
+                    <div class="timeline-item glass-card">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">Sep 2022 - Feb 2026</span>
+                        <h4>Universitas Aisyiyah Yogyakarta</h4>
+                        <span class="highlight-text">S1 Teknologi Informasi | IPK: 3.83/4.00</span>
+                        <ul>
+                            <li>Sangat andal dan disiplin tinggi dalam menuntaskan tugas akhir sesuai standar akademis.
+                            </li>
+                            <li>Tingkat ketelitian ekstra pada berbagai proyek praktikum sesuai pedoman.</li>
+                            <li>Mengerahkan dedikasi utuh secara konsisten dalam pengembangan setiap proyek kampus.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exp-col">
+                    <h3 class="sub-heading"><ion-icon name="people-outline"></ion-icon> Organisasi & Tim</h3>
+                    <div class="timeline-item glass-card">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">Feb 2024 - Feb 2025</span>
+                        <h4>UKM Sepak Bola & Futsal UNISA</h4>
+                        <span class="highlight-text">Koordinator Media</span>
+                        <p>Memimpin manajemen komunikasi organisasi sekaligus manajer media utama. Bertanggung jawab
+                            dalam merancang strategi publikasi media, serta pengelolaan konten harian media sosial.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="certifications-section hidden">
+            <div class="section-header right-align">
+                <div class="line"></div>
+                <h2 class="section-title">07. <span class="text-gradient">Certifications & Awards</span></h2>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-card glass-card">
+                    <img src="penghargaan lulusan terbaik non akademik.jpg" alt="Lulusan Terbaik Non Akademik">
+                    <h3>Penghargaan Lulusan Berprestasi Terbaik Non Akademik</h3>
+                </div>
+                <div class="cert-card glass-card">
+                    <img src="medali perak kategori lomba pengembangan aplikasi perangkat lunak.jpg"
+                        alt="Medali Perak Kategori Lomba Pengembangan Aplikasi">
+                    <h3>Medali Perak Lomba Web Aplikasi</h3>
+                </div>
+                <div class="cert-card glass-card">
+                    <img src="semifinalist web development proxocoris international.jpg"
+                        alt="Semifinalist Web Development Proxocoris">
+                    <h3>Semifinalist Web Dev (Proxocoris International)</h3>
+                </div>
+                <div class="cert-card glass-card">
+                    <img src="sertifikat juara 3 lombo vidio kreatif.jpg" alt="Juara 3 Lomba Video Kreatif">
+                    <h3>Juara 3 Lomba Video Kreatif</h3>
+                </div>
+                <div class="cert-card glass-card">
+                    <img src="sertifikat deep learning.jpg" alt="Sertifikat Deep Learning">
+                    <h3>Sertifikasi Deep Learning</h3>
+                </div>
+                <div class="cert-card glass-card">
+                    <img src="sertifikat magang aino.jpg" alt="Sertifikat Magang PT Aino">
+                    <h3>Sertifikat Magang PT Aino Indonesia</h3>
+                </div>
+                <div class="cert-card glass-card">
+                    <img src="Sertifikat PKL.jpg" alt="Sertifikat PKL">
+                    <h3>Sertifikat Praktik Kerja Lapangan (PKL)</h3>
+                </div>
+                <div class="cert-card glass-card">
+                    <img src="sertifikat mercu buana yogyakarta international youth forum.jpg"
+                        alt="Sertifikat International Youth Forum">
+                    <h3>International Youth Forum (Mercu Buana)</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="publications-section hidden">
+            <div class="section-header">
+                <h2 class="section-title">08. <span class="text-gradient">Scientific Publications</span></h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="grid-2-col">
+                <div class="exp-col" style="display:flex; flex-direction:column; justify-content:center;">
+                    <div class="timeline-item glass-card">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">Published | Sinta 5</span>
+                        <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.5;">Perancangan dan
+                            Implementasi Dashboard Berbasis Web untuk Meningkatkan Transparansi dan Pengawasan Kinerja
+                            Menggunakan Metode Waterfall</h4>
+                        <p>Jurnal BSI (IJEC) - Publikasi penelitian mengenai optimisasi dashboard sistem pemantauan.</p>
+                        <div class="project-links">
+                            <a href="https://jurnal.bsi.ac.id/index.php/ijec/article/view/7683" target="_blank"
+                                class="interactive"><ion-icon name="document-text-outline"></ion-icon> Baca Jurnal
+                                Lengkap</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-col" style="display:flex; flex-direction:column; justify-content:center;">
+                    <div class="timeline-item glass-card">
+                        <div class="timeline-dot" style="border-color: #ffce00;"></div>
+                        <span class="timeline-date" style="color: #ffce00;">In Editing | Sinta 3</span>
+                        <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem; line-height: 1.5;">Sistem Prediksi Risiko
+                            Preeklamsia Menggunakan Algoritma Random Forest dengan Interpretasi SHAP</h4>
+                        <p>Penelitian medis yang berfokus pada Machine Learning interaktif untuk mendiagnosis risiko
+                            preeklampsia berstandar Jurnal Sinta 3.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <h2 class="footer-title">Let's Compile Something Great.</h2>
+                <a href="mailto:miftrahurrizqy11@gmail.com" class="mega-link">miftrahurrizqy11@gmail.com</a>
+                <p class="footer-copy">© 2026 Miftahur Rizqy. All systems operational.</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
