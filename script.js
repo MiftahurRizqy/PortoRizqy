@@ -245,16 +245,17 @@ window.addEventListener('scroll', () => {
     let current = '';
     
     sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if(pageYOffset >= (sectionTop - sectionHeight / 3)){
+        const rect = section.getBoundingClientRect();
+        // Section is considered active if its top is near or above the navbar 
+        // AND its bottom is below the navbar
+        if(rect.top <= 250 && rect.bottom >= 250) {
             current = section.getAttribute('id');
         }
     });
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if(link.getAttribute('href').includes(current)){
+        if(current && link.getAttribute('href').includes(current)){
             link.classList.add('active');
         }
     });
