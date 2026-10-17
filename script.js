@@ -1,262 +1,82 @@
-// Custom Cursor
-const cursor = document.querySelector('.custom-cursor');
-const cursorFollower = document.querySelector('.custom-cursor-follower');
-const interactiveElements = document.querySelectorAll('a, button, .interactive, .project-card, .glass-card');
-
-document.addEventListener('mousemove', (e) => {
-    // Basic cursor movement
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    
-    // Follower has a slight delay
-    setTimeout(() => {
-        cursorFollower.style.left = e.clientX + 'px';
-        cursorFollower.style.top = e.clientY + 'px';
-    }, 50);
+'use strict';
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const menuButton = document.querySelector('.menu-toggle');
+const navigation = document.querySelector('#navigation');
+function closeMenu() { navigation.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false'); menuButton.textContent = 'Menu +'; }
+menuButton.addEventListener('click', () => { const open = navigation.classList.toggle('open'); menuButton.setAttribute('aria-expanded', String(open)); menuButton.textContent = open ? 'Tutup −' : 'Menu +'; });
+navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+document.addEventListener('keydown', event => { if (event.key === 'Escape' && navigation.classList.contains('open')) { closeMenu(); menuButton.focus(); } });
+window.addEventListener('resize', () => { if (window.innerWidth > 700) closeMenu(); });
+const projects = [...document.querySelectorAll('.project')];
+document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
+ document.querySelectorAll('[data-filter]').forEach(item => { item.classList.toggle('active', item === button); item.setAttribute('aria-pressed', String(item === button)); });
+ let count = 0; projects.forEach(project => { project.hidden = button.dataset.filter !== 'all' && project.dataset.category !== button.dataset.filter; if (!project.hidden) { count++; project.classList.add('visible'); } });
+ document.querySelector('#filter-status').textContent = `${count} proyek ditampilkan.`;
+}));
+const certificates = [
+ ['penghargaan lulusan terbaik non akademik.jpg', 'Lulusan Berprestasi Terbaik Non Akademik'],
+ ['medali perak kategori lomba pengembangan aplikasi perangkat lunak.jpg', 'Medali Perak · Pengembangan Aplikasi'],
+ ['semifinalist web development proxocoris international.jpg', 'Semifinalist · Proxocoris International'],
+ ['sertifikat juara 3 lombo vidio kreatif.jpg', 'Juara 3 · Lomba Video Kreatif'],
+ ['sertifikat deep learning.jpg', 'Sertifikasi Deep Learning'],
+ ['sertifikat magang aino.jpg', 'Magang · PT Aino Indonesia'],
+ ['Sertifikat PKL.jpg', 'Praktik Kerja Lapangan'],
+ ['sertifikat mercu buana yogyakarta international youth forum.jpg', 'International Youth Forum · Mercu Buana']
+];
+const dialog = document.querySelector('#certificate-dialog');
+const certificateImage = document.querySelector('#certificate-image');
+let lastCertificate;
+certificates.forEach(([file, title]) => {
+ const button = document.createElement('button'); button.className = 'award'; button.setAttribute('aria-label', `Lihat sertifikat ${title}`);
+ const frame = document.createElement('div'); frame.className = 'award-image';
+ const image = document.createElement('img'); image.src = file; image.alt = title; image.loading = 'lazy'; image.decoding = 'async'; frame.append(image);
+ const heading = document.createElement('h3'); heading.textContent = `${title} ↗`; button.append(frame, heading);
+ button.addEventListener('click', () => { lastCertificate = button; certificateImage.src = file; certificateImage.alt = title; document.querySelector('#certificate-title').textContent = title; dialog.showModal(); document.body.style.overflow = 'hidden'; });
+ document.querySelector('#awards-grid').append(button);
 });
-
-interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursor.style.backgroundColor = 'var(--accent-2)';
-        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursorFollower.style.borderColor = 'var(--accent-2)';
-    });
-    
-    el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursor.style.backgroundColor = 'var(--accent-1)';
-        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorFollower.style.borderColor = 'var(--accent-1)';
-    });
+document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+dialog.addEventListener('click', event => { if (event.target === dialog) { const bounds = dialog.getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close(); } });
+dialog.addEventListener('close', () => { document.body.style.overflow = ''; lastCertificate?.focus(); });
+document.querySelector('#copy-email').addEventListener('click', async () => {
+ const status = document.querySelector('#copy-status');
+ try { await navigator.clipboard.writeText('miftrahurrizqy11@gmail.com'); status.textContent = 'Email berhasil disalin. Sampai ketemu di inbox!'; }
+ catch { status.textContent = 'Silakan salin alamat email: miftrahurrizqy11@gmail.com'; }
 });
-
-// Mobile Nav Menu
-const mobileBtn = document.querySelector('.mobile-menu-btn');
-const navItems = document.querySelector('.nav-items');
-const navLinks = document.querySelectorAll('.nav-item');
-
-mobileBtn.addEventListener('click', () => {
-    mobileBtn.classList.toggle('active');
-    navItems.classList.toggle('active');
-});
-
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        mobileBtn.classList.remove('active');
-        navItems.classList.remove('active');
-    });
-});
-
-// Scroll Reveal with Intersection Observer
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting) {
-            entry.target.classList.add('show');
-            // Optional: stop observing once revealed
-            // observer.unobserve(entry.target); 
-        } else {
-            // Optional: reset animation when scrolling away
-            entry.target.classList.remove('show');
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.hidden').forEach((element) => {
-    observer.observe(element);
-});
-
-// Typing Text Effect for Subtitle
-const typingText = document.querySelector('.typing-text');
-const originalText = typingText.textContent;
-typingText.textContent = '';
-let charIndex = 0;
-
-function type() {
-    if (charIndex < originalText.length) {
-        typingText.textContent += originalText.charAt(charIndex);
-        charIndex++;
-        setTimeout(type, 80);
-    }
+function updateTime() { document.querySelector('#local-time').textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit' }).format(new Date()) + ' WIB'; }
+updateTime(); setInterval(updateTime, 60000); document.querySelector('#year').textContent = new Date().getFullYear();
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+ const reveal = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); reveal.unobserve(entry.target); } }), { threshold: .06 });
+ document.querySelectorAll('.project, .section-heading, .about-copy, .expertise article, .journey-list article, .research-grid article').forEach(element => { element.classList.add('reveal'); reveal.observe(element); });
 }
-// Start typing after a short delay
-setTimeout(type, 1000);
-
-
-// Theme Toggler
-const themeToggleBtn = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
-
-// Check saved theme
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-    document.documentElement.classList.add('light-mode');
-    themeIcon.setAttribute('name', 'moon-outline');
-}
-
-themeToggleBtn.addEventListener('click', () => {
-    document.documentElement.classList.toggle('light-mode');
-    const isLight = document.documentElement.classList.contains('light-mode');
-    
-    if (isLight) {
-        themeIcon.setAttribute('name', 'moon-outline');
-        localStorage.setItem('theme', 'light');
-    } else {
-        themeIcon.setAttribute('name', 'sunny-outline');
-        localStorage.setItem('theme', 'dark');
-    }
-    updateCanvasColors();
-});
-
-// Neural Network Canvas Background
-const canvas = document.getElementById('neural-canvas');
+// A projected 3D torus: real depth, perspective and surface lighting, without a WebGL dependency.
+const canvas = document.querySelector('#orbit');
 const ctx = canvas.getContext('2d');
-
-let width, height;
-let particles = [];
-const connectionDistance = 120;
-const particleCount = 80;
-
-let accent1Str = '0, 243, 255';
-let accent2Str = '138, 43, 226';
-
-function updateCanvasColors() {
-    if (document.documentElement.classList.contains('light-mode')) {
-        accent1Str = '14, 165, 233';
-        accent2Str = '124, 58, 237';
-    } else {
-        accent1Str = '0, 243, 255';
-        accent2Str = '138, 43, 226';
-    }
+const motionButton = document.querySelector('#motion-toggle');
+let paused = reducedMotion.matches, visible = true, frame = 0, previous = 0, angle = .35, pointerX = 0, pointerY = 0, smoothX = 0, smoothY = 0, width = 0, height = 0;
+const points = [];
+for (let i = 0; i < 110; i++) for (let j = 0; j < 36; j++) { const u = i / 110 * Math.PI * 2, v = j / 36 * Math.PI * 2; const radius = 1.36 + .49 * Math.cos(v); points.push({ x:radius * Math.cos(u), y:radius * Math.sin(u), z:.49 * Math.sin(v), shade:Math.sin(v), stripe:j % 6 === 0 }); }
+function draw() {
+ if (!ctx || !width) return;
+ ctx.clearRect(0,0,width,height);
+ const ax = .87 + smoothY * .35, ay = -.4 + smoothX * .4, az = angle;
+ const ca = Math.cos(ax), sa = Math.sin(ax), cb = Math.cos(ay), sb = Math.sin(ay), cc = Math.cos(az), sc = Math.sin(az);
+ const scale = Math.min(width, height) * .225;
+ const projected = points.map(point => {
+  const x1 = point.x * cc - point.y * sc, y1 = point.x * sc + point.y * cc;
+  const y2 = y1 * ca - point.z * sa, z2 = y1 * sa + point.z * ca;
+  const x3 = x1 * cb + z2 * sb, z3 = -x1 * sb + z2 * cb;
+  const perspective = 5 / (5 - z3);
+  return { x:width / 2 + x3 * scale * perspective, y:height * .49 + y2 * scale * perspective, z:z3, r:(point.stripe ? 1.45 : 1.05) * perspective, shade:point.shade };
+ }).sort((a,b) => a.z - b.z);
+ for (const point of projected) { const light = 53 + (point.z + 1.9) * 6; ctx.fillStyle = `hsla(215,95%,${light}%,${.48 + (point.z + 1.9) * .12})`; ctx.beginPath(); ctx.arc(point.x, point.y, point.r, 0, Math.PI*2); ctx.fill(); }
 }
-updateCanvasColors();
-
-function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resize);
-resize();
-
-class Particle {
-    constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.radius = Math.random() * 2 + 1;
-    }
-
-    update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-    }
-
-    draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${accent1Str}, 0.5)`;
-        ctx.fill();
-    }
-}
-
-function initParticles() {
-    particles = [];
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
-}
-
-function connectParticles() {
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < connectionDistance) {
-                const opacity = 1 - (distance / connectionDistance);
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.strokeStyle = `rgba(${accent2Str}, ${opacity * 0.2})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-            }
-        }
-    }
-}
-
-let mouseX = 0;
-let mouseY = 0;
-
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
-
-function drawMouseConnections() {
-    particles.forEach(p => {
-        const dx = mouseX - p.x;
-        const dy = mouseY - p.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 150) {
-            const opacity = 1 - (distance / 150);
-            ctx.beginPath();
-            ctx.moveTo(mouseX, mouseY);
-            ctx.lineTo(p.x, p.y);
-            ctx.strokeStyle = `rgba(${accent1Str}, ${opacity * 0.5})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-        }
-    });
-}
-
-function animate() {
-    ctx.clearRect(0, 0, width, height);
-
-    particles.forEach(p => {
-        p.update();
-        p.draw();
-    });
-
-    connectParticles();
-    drawMouseConnections();
-
-    requestAnimationFrame(animate);
-}
-
-initParticles();
-animate();
-
-// Active nav link highlight on scroll
-const sections = document.querySelectorAll('section');
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        // Section is considered active if its top is near or above the navbar 
-        // AND its bottom is below the navbar
-        if(rect.top <= 250 && rect.bottom >= 250) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if(current && link.getAttribute('href').includes(current)){
-            link.classList.add('active');
-        }
-    });
-});
+function resizeCanvas() { const bounds = canvas.getBoundingClientRect(); width = bounds.width; height = bounds.height; const ratio = Math.min(devicePixelRatio || 1, 2); canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); ctx?.setTransform(ratio,0,0,ratio,0,0); draw(); }
+function animate(time) { frame = 0; if (paused || !visible || document.hidden || !ctx) return; const delta = previous ? Math.min(time - previous, 50) : 16; previous = time; angle += delta * .00014; smoothX += (pointerX - smoothX) * .04; smoothY += (pointerY - smoothY) * .04; draw(); frame = requestAnimationFrame(animate); }
+function syncAnimation() { cancelAnimationFrame(frame); frame = 0; previous = 0; document.body.classList.toggle('motion-paused', paused); motionButton.setAttribute('aria-pressed', String(paused)); motionButton.setAttribute('aria-label', paused ? 'Putar animasi' : 'Jeda animasi'); motionButton.textContent = paused ? '▶' : 'Ⅱ'; if (!paused && visible && !document.hidden) frame = requestAnimationFrame(animate); else draw(); }
+document.querySelector('.hero-stage').addEventListener('pointermove', event => { const bounds = canvas.getBoundingClientRect(); pointerX = (event.clientX - bounds.left) / bounds.width * 2 - 1; pointerY = (event.clientY - bounds.top) / bounds.height * 2 - 1; document.querySelector('#coord-x').textContent = pointerX.toFixed(2); document.querySelector('#coord-y').textContent = pointerY.toFixed(2); });
+document.querySelector('.hero-stage').addEventListener('pointerleave', () => { pointerX = 0; pointerY = 0; });
+motionButton.addEventListener('click', () => { paused = !paused; syncAnimation(); });
+reducedMotion.addEventListener('change', event => { paused = event.matches; syncAnimation(); });
+document.addEventListener('visibilitychange', syncAnimation);
+if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible = entries[0].isIntersecting; syncAnimation(); }).observe(canvas);
+window.addEventListener('resize', resizeCanvas); resizeCanvas(); syncAnimation();
